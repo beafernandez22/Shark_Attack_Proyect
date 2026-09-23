@@ -36,3 +36,17 @@ def clean_year(df):
     df["Year"] = pd.to_numeric(df["Year"], errors="coerce")
     df["Year"] = df["Year"].astype("Int64")
     return df
+
+
+# Limpia y estandariza la columna de fatalidad
+def clean_fatal(df):
+    df["Fatal Y/N"] = (
+        df["Fatal Y/N"]
+        .astype("string")
+        .str.strip()
+        .str.upper()
+    )
+
+    df.loc[~df["Fatal Y/N"].isin(["Y", "N"]), "Fatal Y/N"] = "UNKNOWN"
+
+    return df
