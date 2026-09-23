@@ -1,3 +1,5 @@
+import pandas as pd
+
 # Limpia y estandariza la columna Country
 def clean_country(df):
     df["Country"] = (
@@ -26,4 +28,11 @@ def clean_state(df):
 def clean_geographic_data(df):
     df = clean_country(df)
     df = clean_state(df)
+    return df
+
+
+# Limpia y formatea la columna Year
+def clean_year(df):
+    df["Year"] = pd.to_numeric(df["Year"], errors="coerce")
+    df["Year"] = df["Year"].astype("Int64")
     return df
